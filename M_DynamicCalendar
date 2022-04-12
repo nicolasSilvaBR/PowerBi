@@ -1,0 +1,18 @@
+Dynamic Calendar with M Language (Power Query)
+
+let
+    /*Var*/
+    minDate =       List.Min( fTransactions[Date] ), // table[column]
+    maxDate =       List.Max( fTransactions[Date] ), // table[column]
+    minYear =       Date.Year ( minDate ),
+    maxYear =       Date.Year ( maxDate ),
+    startDate =     #date( minYear,1,1 ),
+    endDate =       #date( maxYear,12,31) ,
+    durationDays =      Duration.Days( endDate - startDate ) + 1,     
+
+    /*Building the table*/
+    Source = List.Dates(startDate, durationDays, #duration(1, 0, 0, 0)),
+    #"Converted to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+    #"Changed Type" = Table.TransformColumnTypes(#"Converted to Table",{{"Column1", type date}})
+in
+    #"Changed Type"
