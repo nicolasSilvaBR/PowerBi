@@ -1,0 +1,7 @@
+/* Works as a Join - When a Table has no Relationship */
+
+Vl.Frete = 
+LOOKUPVALUE(
+    AuxFrete[ValorFrete],             /* INNER JOIN */
+    AuxFrete[idNota],fVendas[idNota]  /* ON */
+)
