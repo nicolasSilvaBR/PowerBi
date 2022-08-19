@@ -1,18 +1,34 @@
-Dynamic Calendar with M Language (Power Query)
+/* Dynamic Calendar */
 
 let
-    /*Var*/
-    minDate =       List.Min( fTransactions[Date] ), // table[column]
-    maxDate =       List.Max( fTransactions[Date] ), // table[column]
-    minYear =       Date.Year ( minDate ),
-    maxYear =       Date.Year ( maxDate ),
-    startDate =     #date( minYear,1,1 ),
-    endDate =       #date( maxYear,12,31) ,
-    durationDays =      Duration.Days( endDate - startDate ) + 1,     
+    /* Variables */
+    
+    Table = List.Buffer(fVendas[Data]),     /* Works like an Index */
 
-    /*Building the table*/
-    Source = List.Dates(startDate, durationDays, #duration(1, 0, 0, 0)),
+    MinDate = List.Min( Table ),            /* fVendas is a Table, Data is a Column */
+    MaxDate = List.Max( Table ),            /* Using the Variable table = fVendas[Data]*/
+
+    MaxYear = Date.Year(MaxDate),
+    MinYear = Date.Year(MinDate),
+    BeginDate = #date( MinYear, 1, 1 ),
+    EndDate = #date( MaxYear, 12, 31 ),
+    Duration = Duration.Days( EndDate - BeginDate ) + 1,
+
+    Source = List.Dates(BeginDate, Duration, #duration(1, 0, 0, 0)),
+
     #"Converted to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
-    #"Changed Type" = Table.TransformColumnTypes(#"Converted to Table",{{"Column1", type date}})
+    #"Renamed Columns" = Table.RenameColumns(#"Converted to Table",{{"Column1", "Date"}}),
+    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Date", type date}}),
+    #"Inserted Year" = Table.AddColumn(#"Changed Type", "Year", each Date.Year([Date]), Int64.Type),
+    #"Inserted Month" = Table.AddColumn(#"Inserted Year", "Month", each Date.Month([Date]), Int64.Type),
+    #"Inserted Month Name" = Table.AddColumn(#"Inserted Month", "Month Name", each Date.MonthName([Date]), type text),
+    #"Inserted Day" = Table.AddColumn(#"Inserted Month Name", "Day", each Date.Day([Date]), Int64.Type),
+    #"Inserted Day Name" = Table.AddColumn(#"Inserted Day", "Day Name", each Date.DayOfWeekName([Date]), type text),
+    #"Inserted Quarter" = Table.AddColumn(#"Inserted Day Name", "Quarter", each Date.QuarterOfYear([Date]), Int64.Type),
+    #"Added Prefix" = Table.TransformColumns(#"Inserted Quarter", {{"Quarter", each "Q" & Text.From(_, "en-IE"), type text}}),
+    #"Added Custom Column" = Table.AddColumn(#"Added Prefix", "Month Year", each Text.Combine({Text.Start([Month Name], 3), " ", Text.From([Year], "en-IE")}), type text),
+    #"Added Custom Column1" = Table.AddColumn(#"Added Custom Column", "YearMonthNum", each Text.Combine({Text.From([Year], "en-IE"), Text.PadStart(Text.From([Month], "en-IE"), 2, "0")}), type text),
+    #"Renamed Columns1" = Table.RenameColumns(#"Added Custom Column1",{{"Month Year", "MonthYear"}, {"Month Name", "MonthName"}, {"Day Name", "DayName"}}),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Renamed Columns1",{{"YearMonthNum", Int64.Type}})
 in
-    #"Changed Type"
+    #"Changed Type1"
