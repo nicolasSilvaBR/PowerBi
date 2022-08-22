@@ -1,0 +1,7 @@
+20 America do Norte Vendas =
+CALCULATE(
+    [05 Total Gross Sales],
+    dLocal[Continente] = "America do Norte"
+)
+
+-- Calculate funciona como a WHERE no SQL
