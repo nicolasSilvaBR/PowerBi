@@ -1,0 +1,11 @@
+19 Clientes nao Positivados =
+COUNTROWS(
+    EXCEPT(
+        VALUES(dCliente[idCliente]), -- Todos os Clientes
+        VALUES(fVendas[Cliente])     -- Clientes que Compraram
+    )
+)  
+
+-- EXCEPT Retorna uma tabela
+-- COUNTROWS Contas linhas de uma tabela
+-- Values sao valores distintos de uma tabela = Select Distinct
