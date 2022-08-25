@@ -8,3 +8,13 @@ SWITCH(
 )
 
 -- TRUE OR FALSE THEN ELSE
+
+
+38 Vidao America do Norte = 
+SWITCH(
+    FIRSTNONBLANK(TbMedidas[Codigo],"BRT"),     -- Valor padrao inicial
+    "BRT",[20 America do Norte Vendas],         -- Se BRT traga medida 20...
+    "QTC",[21 America do Norte Clientes Positivados],
+    "QTV",[22 America do Norte Quantidade de Vendas],
+    "LIQ",[23 America do Norte Receita Liquida]
+)
