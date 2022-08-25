@@ -1,0 +1,10 @@
+Classificacao Switch = 
+SWITCH(
+    TRUE(),
+    fVendas[Quantidade] > 15, "Excelente",
+    fVendas[Quantidade] > 10, "Bom",
+    fVendas[Quantidade] > 5, "Regular",
+    "Ruim"
+)
+
+-- TRUE OR FALSE THEN ELSE
