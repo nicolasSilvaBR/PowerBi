@@ -1,0 +1,20 @@
+
+41 Top 1 Margem de Lucro(%) = 
+
+-- Criando a #tabela Virtual
+-- Summarize = Group by
+var vTabelaAux = 
+    SUMMARIZE(
+    dLocal,
+    dLocal[País],
+    "Lucro (%)",
+    [15 Margem de Lucro (%)]
+    )
+
+--Output
+return
+
+MAXX(
+    vTabelaAux, -- chamando a tabela virtual
+    [Lucro (%)]
+)
