@@ -1,0 +1,10 @@
+Vendas Agregada = 
+SUMMARIZE(
+    dVendedor,                 -- qual tabelas
+    dVendedor[Gerente],        -- qual coluna
+    "Total Vendido",           -- Alias
+    [05 Total Gross Sales]     -- qual coluna ou medidae de agregacao
+)
+
+
+-- Funciona como a Group BY
