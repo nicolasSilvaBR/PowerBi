@@ -1,3 +1,5 @@
+-- Criar uma tabela Virtual (new table)
+
 Vendas Agregada = 
 SUMMARIZE(
     dVendedor,                 -- qual tabelas
