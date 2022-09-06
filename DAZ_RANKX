@@ -1,0 +1,5 @@
+51 Ranking Gerentes = 
+RANKX(
+    dVendedor,                  -- Qual Tabelas
+    [05 Total Gross Sales]      -- Por qual medidade ou Coluna criar o Ranking
+)
