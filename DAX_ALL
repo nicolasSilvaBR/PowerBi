@@ -12,3 +12,6 @@ América do Norte	      8	                      2
 América do Sul	        8	                      2
 Europa	                8	                      3
 Oceania	                8	                      1
+
+
+FUNCIONA COMO OVER() SEM PARTITION BY
