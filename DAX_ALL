@@ -1,0 +1,14 @@
+48 Qtde Paises ALL = 
+VAR TbAll = ALL(dLocal[País])
+
+RETURN
+
+COUNTROWS(TbAll)
+
+-- Os valores na All nao respeitam o contexto de linha
+
+Continente	      48 Qtde Paises ALL	  47 Qtde Paises VALUES
+América do Norte	      8	                      2
+América do Sul	        8	                      2
+Europa	                8	                      3
+Oceania	                8	                      1
