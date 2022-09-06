@@ -1,0 +1,17 @@
+47 Qtde Paises VALUES = 
+var TbValues = VALUES(dLocal[País])
+
+RETURN
+
+COUNTROWS(TbValues)
+
+-- A Values distribue de acordo com o contexto de linhas 
+
+Continente	      48 Qtde Paises ALL	  47 Qtde Paises VALUES
+América do Norte	      8	                      2
+América do Sul	        8	                      2
+Europa	                8	                      3
+Oceania	                8	                      1
+
+
+FUNCIONA COMO PARTITION BY Continente
