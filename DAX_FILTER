@@ -1,0 +1,7 @@
+52 Frete Clientes A = 
+SUMX(
+    FILTER(                                         -- Filter Retorna uma Tabela
+        fVendas,                                    -- Retornando Tabela fvendas
+        RELATED(dCliente[Classificacao]) = "A"      -- Filtrando de acordo com a Tabela dClientes
+    )
+)
