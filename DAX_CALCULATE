@@ -5,3 +5,11 @@ CALCULATE(
 )
 
 -- Calculate funciona como a WHERE no SQL
+
+
+CALCULATE(
+    [05 Total Gross Sales],
+    ALL(dVendedor)
+)
+
+-- O ALL tira todos os filtros, nesse caso esta tirando da tabela inteira.
