@@ -1,0 +1,13 @@
+53 Faturamento Top 1 = 
+
+var TbGerentes = ALL(dVendedor[Gerente])  -- Trazer a tabela toda sem filtros
+
+RETURN
+
+CALCULATE(                                -- Calculate = Where, filtrando os dados
+    [05 Total Gross Sales],               -- Trazer os valores da medida 05
+    FILTER(                               -- Filtrando de acordo com a tabela que e gerado com a FILTER Seria como uma EXISTS
+        TbGerentes,
+        [51 Ranking Gerentes] = 1
+    )
+)
