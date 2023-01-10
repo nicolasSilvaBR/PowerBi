@@ -1,0 +1,11 @@
+Churn MRR YTD v2 = 
+VAR MesContexto = MAX(dCalendario[Mês])
+VAR ProjecaoAno =
+SUMX(
+    DATESYTD(dCalendario[Data]), //Para cada contexto de mês eu preciso varrer novamente desde o início do ano, até o último dia do contexto
+    VAR MesIteracao = CALCULATE(MAX(dCalendario[Mês]))
+    RETURN
+    [Churn] * (MesContexto - MesIteracao + 1)
+)
+RETURN
+ProjecaoAno
