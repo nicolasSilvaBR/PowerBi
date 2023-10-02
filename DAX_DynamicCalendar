@@ -1,0 +1,29 @@
+--Verificando Data Inicio e Fim.
+
+CALENDAR ( MIN ( Tb.[Coluna] ); MAX ( Tb.[Coluna] ) )
+
+--Inserindo Complementos da data.
+
+Dia =
+DAY ( 'CalendarioDAX'[Date] )
+
+Mês =
+MONTH( 'CalendarioDAX'[Date] )
+
+Ano =
+YEAR( 'CalendarioDAX'[Date] )
+
+DiaSemana =
+FORMAT ( 'CalendarioDAX'[Date]; "ddd" )
+ 
+MêsNome =
+FORMAT( 'CalendarioDAX'[Date];"mmmm" )
+ 
+MêsCurto =
+FORMAT( 'CalendarioDAX'[Date];"mmm" )
+ 
+Trimestre =
+FORMAT( 'CalendarioDAX'[Date];"q" ) & "T"
+ 
+Trim/Ano =
+CalendarioDAX[Trimestre] & CalendarioDAX[Ano]
